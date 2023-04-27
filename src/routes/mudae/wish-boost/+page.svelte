@@ -75,7 +75,7 @@
 		<button on:click={calculate}> Calculate </button>
 	</div>
 
-	<p>You should invest {idealInvestment ?? "?"} rolls.</p>
+	<h2>You should invest {idealInvestment ?? "?"} rolls.</h2>
 
 	<div class="results">
 		<p style="margin-left: 1em;">Invested Rolls</p>
@@ -100,6 +100,20 @@
 	.main {
 		display: flex;
 		flex-direction: column;
+	}
+
+	.userInputs {
+		display: flex;
+		font-size: xx-large;
+		min-height: 2em;
+
+		input {
+			font-size: 30px;
+		}
+
+		button {
+			font-size: 20px;
+		}
 	}
 
 	.results {
