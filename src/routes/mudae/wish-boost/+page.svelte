@@ -105,10 +105,14 @@
 	.results {
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
-		gap: 10px;
 		max-width: max-content;
 
 		p {
+			padding: 10px;
+			margin-top: 0;
+			margin-bottom: 0;
+			border: 1px solid black;
+
 			text-align: center;
 		}
 	}

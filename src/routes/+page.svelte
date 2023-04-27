@@ -1,2 +1,14 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<h1>Table of Contents</h1>
+<div class="toc">
+	<a href="mudae"> Mudae </a>
+	<a href="mudae/wish-boost" style="text-indent: 2em"
+		>Mudae Wish Boost Calculator
+	</a>
+</div>
+
+<style lang="scss">
+	.toc {
+		display: flex;
+		flex-direction: column;
+	}
+</style>
