@@ -78,16 +78,16 @@
 	<p>You should invest {idealInvestment ?? "?"} rolls.</p>
 
 	<div class="results">
-		<!-- <p>Remaining Rolls</p> -->
-		<p>Invested Rolls</p>
-		<p>Wish Multiplier</p>
-		<p>Firstwish multiplier</p>
-		<p>Total wishrate</p>
-		<p>Total firstwish rate</p>
+		<p style="margin-left: 1em;">Invested Rolls</p>
+		<p style="margin-right: 1em;">Remaining Rolls</p>
+		<p style="margin-left: 1em;">Wish Multiplier</p>
+		<p style="margin-right: 1em;">Firstwish multiplier</p>
+		<p style="margin-left: 1em;">Effective Wish Rolls</p>
+		<p style="margin-right: 1em;">Effective Firstwish Rolls</p>
 
 		{#each results as result}
-			<!-- <p>{result.rolls}</p> -->
 			<p>{result.invested}</p>
+			<p>{result.rolls}</p>
 			<p>{result.wlMultiplier.toFixed(2)}</p>
 			<p>{result.fwMultiplier.toFixed(2)}</p>
 			<p>{result.wlTotal.toFixed(2)}</p>
@@ -104,7 +104,7 @@
 
 	.results {
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(6, 1fr);
 		max-width: max-content;
 
 		p {
