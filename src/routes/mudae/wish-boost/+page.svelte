@@ -1,79 +1,56 @@
 <script>
+	import { calcInvestTable } from "./mudae-wb.js";
+
+	// In-binding variables
 	let userWishes;
 
+	// Out-binding variables
 	let idealInvestment = 0;
 	let results = [];
 
-	/**
-	 * Given a number of rolls to invest,
-	 * calculate the effectiveness multiplier for remaining rolls.
-	 * @param rollCount Number of rolls to invest
-	 * @return Effective multiplier for wishlist/firstwish
-	 */
-	function investRolls(rollCount) {
-		let fw = 1 + 0.1 * rollCount;
-		let wl = 1;
+	// Update  roll investment table
+	function calculate(event) {
+		const elements = event.target.elements;
+		let bonusMultiplier = {};
+		bonusMultiplier.wishlist = elements.ruby.checked ? 0.5 : 0;
+		bonusMultiplier.wishlist += elements.silver.value * 0.25;
+		bonusMultiplier.firstwish = bonusMultiplier.wishlist;
 
-		// Rolls 1-5 have +20%
-		if (rollCount > 0) wl += 0.2 * (rollCount <= 5 ? rollCount : 5);
-		rollCount -= 5;
-		// Rolls 5-15 have +15%
-		if (rollCount > 0) wl += 0.15 * (rollCount <= 10 ? rollCount : 10);
-		rollCount -= 10;
-		// Remaining rolls have +10%
-		if (rollCount > 0) wl += rollCount * 0.1;
-
-		return {
-			wishlist: wl,
-			firstwish: fw,
-		};
+		const [r, i] = calcInvestTable(userWishes, bonusMultiplier);
+		results = r;
+		idealInvestment = i;
 	}
-
-	// Calculate table of investment
-	function calculate() {
-		let maxEffective = userWishes;
-		idealInvestment = 0;
-		results = [];
-
-		for (let i = 1; i < userWishes; i += 1) {
-			// Perform calculations
-			const rollsLeft = userWishes - i;
-			let multiplier = investRolls(i);
-			const result = {
-				rolls: rollsLeft,
-				invested: i,
-				wlMultiplier: multiplier.wishlist,
-				fwMultiplier: multiplier.firstwish,
-				wlTotal: rollsLeft * multiplier.wishlist,
-				fwTotal: rollsLeft * multiplier.firstwish,
-			};
-
-			// Store calculations, updating maxResult accordingly
-			results.push(result);
-			if (result.wlTotal > maxEffective) {
-				maxEffective = result.wlTotal;
-				idealInvestment = i;
-			}
-		}
-
-		// Forcefully update results
-		results = results;
-	}
-
-	//.toFixed(3)
 </script>
 
 <div class="main">
-	<div class="userInputs">
-		<input
-			bind:value={userWishes}
-			for="wishes"
-			type="number"
-			min="2"
-			placeholder="Total # of rolls"
-		/>
-		<button on:click={calculate}> Calculate </button>
-	</div>
+	<form class="userInputs" on:submit={calculate}>
+		<div style="display: flex; align-items:center;">
+			<p style="margin-right: 1em;">Silver Badge Level</p>
+			<input type="radio" name="silver" value="0" />
+			<label for="0">0</label>
+			<input type="radio" name="silver" value="1" />
+			<label for="1">1</label>
+			<input type="radio" name="silver" value="2" />
+			<label for="2">2</label>
+			<input type="radio" name="silver" value="3" />
+			<label for="3">3</label>
+			<input type="radio" name="silver" value="4" checked="checked" />
+			<label for="4">4</label>
+		</div>
+		<div style="display: flex;">
+			<label for="Ruby" style="margin-right: 1em;"> Ruby 2</label><br />
+			<input type="checkbox" name="ruby" value="ruby" checked="checked" />
+		</div>
+		<div>
+			<input
+				bind:value={userWishes}
+				type="number"
+				min="2"
+				placeholder="Total # of rolls"
+			/>
+			<input type="submit" value="Calculate" />
+		</div>
+	</form>
 
 	<h2>You should invest {idealInvestment ?? "?"} rolls.</h2>
 
@@ -106,6 +83,8 @@
 		display: flex;
 		font-size: xx-large;
 		min-height: 2em;
+		flex-direction: column;
+		margin-bottom: 15vh;
 
 		input {
 			font-size: 30px;
