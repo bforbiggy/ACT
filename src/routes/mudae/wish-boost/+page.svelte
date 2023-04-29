@@ -24,7 +24,7 @@
 
 <div class="main">
 	<form class="userInputs" on:submit={calculate}>
-		<div style="display: flex; align-items:center;">
+		<div id="silver">
 			<p style="margin-right: 1em;">Silver Badge Level</p>
 			<input type="radio" name="silver" value="0" />
 			<label for="0">0</label>
@@ -37,11 +37,13 @@
 			<input type="radio" name="silver" value="4" checked="checked" />
 			<label for="4">4</label>
 		</div>
-		<div style="display: flex;">
+
+		<div id="ruby">
 			<label for="Ruby" style="margin-right: 1em;"> Ruby 2</label><br />
 			<input type="checkbox" name="ruby" value="ruby" checked="checked" />
 		</div>
-		<div>
+
+		<div id="rolls">
 			<input
 				bind:value={userWishes}
 				type="number"
@@ -86,12 +88,22 @@
 		flex-direction: column;
 		margin-bottom: 15vh;
 
-		input {
-			font-size: 30px;
+		#silver {
+			display: flex;
+			align-items: center;
+			height: min-content;
+
+			p {
+				margin: 0;
+			}
 		}
 
-		button {
-			font-size: 20px;
+		#ruby {
+			display: flex;
+		}
+
+		#rolls input {
+			font-size: 30px;
 		}
 	}
 

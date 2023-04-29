@@ -10,5 +10,9 @@
 	.toc {
 		display: flex;
 		flex-direction: column;
+
+		a {
+			width: max-content;
+		}
 	}
 </style>
