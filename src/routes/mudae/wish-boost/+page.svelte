@@ -1,60 +1,51 @@
 <script>
-	import { calcInvestTable } from "./mudae-wb.js";
+	import { calcInvestTable, findIdealInvestment } from "./mudae-wb.js";
 
 	// In-binding variables
-	let userWishes;
+	let userRolls;
+	let bonusMultiplier = {};
 
 	// Out-binding variables
-	let idealInvestment = 0;
+	let wishInvestment = 0;
+	let firstInvestment = 0;
 	let results = [];
 
 	// Update  roll investment table
-	function calculate(event) {
-		const elements = event.target.elements;
-		let bonusMultiplier = {};
-		bonusMultiplier.wishlist = elements.ruby.checked ? 0.5 : 0;
-		bonusMultiplier.wishlist += elements.silver.value * 0.25;
-		bonusMultiplier.firstwish = bonusMultiplier.wishlist;
-
-		const [r, i] = calcInvestTable(userWishes, bonusMultiplier);
-		results = r;
-		idealInvestment = i;
+	function calculate() {
+		results = calcInvestTable(userRolls, bonusMultiplier);
+		[wishInvestment, firstInvestment] = findIdealInvestment(results);
 	}
 </script>
 
 <div class="main">
-	<form class="userInputs" on:submit={calculate}>
-		<div id="silver">
-			<p style="margin-right: 1em;">Silver Badge Level</p>
-			<input type="radio" name="silver" value="0" />
-			<label for="0">0</label>
-			<input type="radio" name="silver" value="1" />
-			<label for="1">1</label>
-			<input type="radio" name="silver" value="2" />
-			<label for="2">2</label>
-			<input type="radio" name="silver" value="3" />
-			<label for="3">3</label>
-			<input type="radio" name="silver" value="4" checked="checked" />
-			<label for="4">4</label>
-		</div>
+	<div class="userInputs">
+		<input
+			bind:value={bonusMultiplier.wishlist}
+			type="number"
+			step="0.25"
+			min="0"
+			placeholder="$bonus wishlist multiplier"
+		/>
+		<input
+			bind:value={bonusMultiplier.firstwish}
+			type="number"
+			step="0.25"
+			min="0"
+			placeholder="$bonus firstwish multiplier"
+		/>
+		<input
+			bind:value={userRolls}
+			type="number"
+			min="2"
+			placeholder="Total # of rolls"
+		/>
+		<button on:click={calculate}>Calculate</button>
+	</div>
 
-		<div id="ruby">
-			<label for="Ruby" style="margin-right: 1em;"> Ruby 2</label><br />
-			<input type="checkbox" name="ruby" value="ruby" checked="checked" />
-		</div>
-
-		<div id="rolls">
-			<input
-				bind:value={userWishes}
-				type="number"
-				min="2"
-				placeholder="Total # of rolls"
-			/>
-			<input type="submit" value="Calculate" />
-		</div>
-	</form>
-
-	<h2>You should invest {idealInvestment ?? "?"} rolls.</h2>
+	<h2>
+		You should invest {wishInvestment ?? "?"} rolls. ({firstInvestment ?? "?"} for
+		firstwishes)
+	</h2>
 
 	<div class="results">
 		<p style="margin-left: 1em;">Invested Rolls</p>
@@ -83,27 +74,18 @@
 
 	.userInputs {
 		display: flex;
-		font-size: xx-large;
 		min-height: 2em;
 		flex-direction: column;
 		margin-bottom: 15vh;
 
-		#silver {
-			display: flex;
-			align-items: center;
-			height: min-content;
-
-			p {
-				margin: 0;
-			}
+		input {
+			font-size: 20px;
+			width: 15em;
 		}
 
-		#ruby {
-			display: flex;
-		}
-
-		#rolls input {
-			font-size: 30px;
+		button {
+			font-size: 20px;
+			max-width: max-content;
 		}
 	}
 
