@@ -1,9 +1,7 @@
 <h1>Table of Contents</h1>
 <div class="toc">
-	<a href="mudae"> Mudae </a>
-	<a href="mudae/wish-boost" style="text-indent: 2em"
-		>Mudae Wish Boost Calculator
-	</a>
+	<a href="mudae"> Mudae Tools</a>
+	<a href="image_wall_spam"> Image Spam Wallpaper </a>
 </div>
 
 <style lang="scss">
