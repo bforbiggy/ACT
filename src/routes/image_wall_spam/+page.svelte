@@ -9,16 +9,17 @@
 
 <div class="wall">
 	{#if src}
-		{#each Array(300) as i}
-			<img
-				{src}
-				alt=""
+		{#each Array(200) as i}
+			<div
+				class="wrapper"
 				style="
 				top: {Math.random() * 115 - 15}vh; 
 				left: {Math.random() * 115 - 15}vw; 
 				height: {Math.random() * 100}vh; 
 				width: {Math.random() * 100}vw"
-			/>
+			>
+				<img {src} alt="" />
+			</div>
 		{/each}
 	{:else}
 		<p>Choose an image:</p>
@@ -36,9 +37,14 @@
 		width: 100vw;
 		height: 100vh;
 
-		img {
+		.wrapper {
 			position: absolute;
-			object-fit: contain;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: fill;
+			}
 		}
 	}
 
