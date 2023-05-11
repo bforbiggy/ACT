@@ -9,15 +9,15 @@
 
 <div class="wall">
 	{#if src}
-		{#each Array(150) as i}
+		{#each Array(300) as i}
 			<img
 				{src}
 				alt=""
 				style="
-				top: {Math.random() * 100 - 15}vh; 
-				left: {Math.random() * 100 - 15}vw; 
-				height: {Math.random() * 100 - 15}vh; 
-				width: {Math.random() * 100 - 15}vw"
+				top: {Math.random() * 115 - 15}vh; 
+				left: {Math.random() * 115 - 15}vw; 
+				height: {Math.random() * 100}vh; 
+				width: {Math.random() * 100}vw"
 			/>
 		{/each}
 	{:else}
@@ -38,6 +38,7 @@
 
 		img {
 			position: absolute;
+			object-fit: contain;
 		}
 	}
 
