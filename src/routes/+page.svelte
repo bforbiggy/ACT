@@ -2,6 +2,7 @@
 <div class="toc">
 	<a href="mudae"> Mudae Tools</a>
 	<a href="image_wall_spam"> Image Spam Wallpaper </a>
+	<a href="/password-generator">Password Generator</a>
 </div>
 
 <style lang="scss">
