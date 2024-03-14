@@ -1,4 +1,4 @@
-# [create-svelte](https://assorted-code-things.pages.dev)
+# [Assorted Code Things](https://assorted-code-things.pages.dev)
 
 ## Developing
 
